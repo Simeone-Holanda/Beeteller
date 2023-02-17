@@ -1,12 +1,15 @@
-import { Text } from "@chakra-ui/react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Login from './pages/Login/Login';
 
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Text color={'yellowButton'}> Hello world. </Text>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/login' element={<Login />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

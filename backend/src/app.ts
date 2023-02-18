@@ -1,7 +1,7 @@
 import express from 'express'
 import morgan from 'morgan'
 import helmet from 'helmet'
-
+import userRouter from './routes/userRoute'
 // import swaggerUi from 'swagger-ui-express';
 // import swaggerFile from './swagger.json';
 
@@ -32,6 +32,15 @@ app.use(helmet())
 
 // app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
+
+app.use('/account', userRouter)
+
+app.use('/', (req, res, next) => {
+    return res.status(200).json({
+        status: '200',
+        message: 'OK!'
+    })
+})
 
 // Rota não encontrada!
 app.use((req, res, next) => {

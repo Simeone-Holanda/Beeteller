@@ -25,7 +25,7 @@
   },
   "include": [
     "src/**/*.ts"
-  ],
+, "src/config/db.js"  ],
   "exclude": [
     "node_modules",
     "test.ts",

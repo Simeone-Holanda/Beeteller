@@ -1,19 +1,38 @@
 import { Box, Button, Flex, Input, Square, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ScreenLogin from '../../assets/ScreenLogin.png'
+import { AuthContext } from '../../contexts/AuthContext'
+import authService from '../../services/authService'
+
 const Login = () => {
 
     const [data, setData] = useState({})
     const [error, setError] = useState()
+    const navigate = useNavigate();
 
-    function handleClick() {
-        if (data.email && data.password) {
-            console.log('Enviado')
-            console.log(data)
-        } else {
-            alert('Por favor insira os dados de email e senha. ')
-            setError('Por favor insira os dados de email e senha. ')
+    const { auth, setAuth } = useContext(AuthContext)
+
+    async function handleClick(e) {
+        e.preventDefault();
+        try {
+            if (data.email && data.password) {
+                let loginUser = await authService.login(data)
+                if (loginUser.statusCode >= 400) {
+                    alert(loginUser.error)
+                } else {
+                    setAuth(true)
+                    navigate('/dashboard')
+                }
+            } else {
+                alert('Por favor insira os dados de email e senha. ')
+                setError('Por favor insira os dados de email e senha. ')
+            }
+        } catch (error) {
+            alert('Algo deu errado verifique se seus dados estão corretos. ')
+            setError('Algo deu errado verifique se seus dados estão corretos. ')
         }
+
     }
 
     return (
@@ -56,9 +75,7 @@ const Login = () => {
                         <Input type={'password'} placeholder={'Enter password'} onChange={(e) => {
                             setData({ ...data, password: e.target.value })
                         }} />
-                        <Button w={'100%'} mt={'15px'} onClick={() => {
-                            handleClick()
-                        }}> Login</Button>
+                        <Button w={'100%'} mt={'15px'} onClick={handleClick}> Login</Button>
                     </Box>
                 </Flex>
 

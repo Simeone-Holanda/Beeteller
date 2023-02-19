@@ -1,21 +1,20 @@
+import { useContext } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import NabBar from './components/NabBar/NabBar';
+import { AuthContext } from './contexts/AuthContext';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Login from './pages/Login/Login';
+import PrivateRoutes from './routes/private.routes';
+import PublicRoutes from './routes/public.routes';
 
 
 function App() {
+  const { auth, setAuth } = useContext(AuthContext)
+
   return (
-    <div className="App">
+    <div>
       <NabBar />
-      <BrowserRouter>
-        <Routes>
-          <Route path='/login' element={<Login />} />
-        </Routes>
-        <Routes>
-          <Route path='/dashboard' element={<Dashboard />} />
-        </Routes>
-      </BrowserRouter>
+      {auth ? <PrivateRoutes /> : <PublicRoutes />}
     </div>
   );
 }

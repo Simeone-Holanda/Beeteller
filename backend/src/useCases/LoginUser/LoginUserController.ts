@@ -13,7 +13,7 @@ export class LoginUserController {
                 throw new AppError('All input is required. ')
             }
             const data = await this.loginUser.execute({ email, password })
-            return response.status(200).send({ user: data })
+            return response.status(200).send({ token: data })
         }
         catch (error) {
             if (error instanceof AppError) {

@@ -11,18 +11,19 @@ const CardCoin = ({ pairOfCrypton, value, description, type }) => {
             boxShadow={'0px 4px 20px rgba(0, 0, 0, 0.15);'}
             borderRadius={'8px'}
             alignItems={'flex-start'}
+
         >
             <Flex
                 direction={'column'}
                 w={'50%'}
                 h={'100%'}
                 padding={'24px'}
-                justifyContent={description ? 'space-between' : 'space-around'}
+                justifyContent={description ? 'space-between' : 'flex-start'}
 
             // alignItems={'flex-start'}
             >
 
-                <Text color={'text'} fontWeight={'bold'}>
+                <Text color={'text'} fontWeight={'bold'} marginBottom={'5px'}>
                     {pairOfCrypton}
                 </Text>
                 <Flex alignItems={'flex-start'}>

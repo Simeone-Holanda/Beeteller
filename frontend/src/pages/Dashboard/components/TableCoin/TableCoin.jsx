@@ -35,7 +35,7 @@ const TableCoin = ({ currencys }) => {
                             w={'100%'}
                             align={'center'}>
                             Moeda
-                            <Image src={IconOrdem} />
+                            <Image src={IconOrdem} cursor={'pointer'} />
                         </Flex>
                     </Th>
                     <Th>
@@ -44,7 +44,7 @@ const TableCoin = ({ currencys }) => {
                             justifyContent={'center'}
                             align={'center'}>
                             Mínima
-                            <Image src={IconOrdem} />
+                            <Image src={IconOrdem} cursor={'pointer'} />
                         </Flex>
                     </Th>
                     <Th>
@@ -52,7 +52,7 @@ const TableCoin = ({ currencys }) => {
                             w={'100%'}
                             align={'center'}>
                             Máxima
-                            <Image src={IconOrdem} />
+                            <Image src={IconOrdem} cursor={'pointer'} />
                         </Flex>
                     </Th>
                     <Th>
@@ -61,7 +61,7 @@ const TableCoin = ({ currencys }) => {
                             justifyContent={'flex-end'}
                             align={'center'}>
                             Variação
-                            <Image src={IconOrdem} />
+                            <Image src={IconOrdem} cursor={'pointer'} />
                         </Flex>
                     </Th>
                 </Tr>

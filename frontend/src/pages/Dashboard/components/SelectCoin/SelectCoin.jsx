@@ -13,7 +13,6 @@ const SelectCoin = () => {
 
     return (
         <Select
-            border={'none'}
             onChange={handleSelection}
             cursor={'pointer'}
             w={'189px'}

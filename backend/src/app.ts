@@ -1,7 +1,8 @@
 import express from 'express'
 import morgan from 'morgan'
 import helmet from 'helmet'
-import userRouter from './routes/userRoute'
+import userRouter from './routes/userRoutes'
+import currencyRoutes from './routes/currencyRoutes'
 // import swaggerUi from 'swagger-ui-express';
 // import swaggerFile from './swagger.json';
 
@@ -34,6 +35,7 @@ app.use(helmet())
 
 
 app.use('/account', userRouter)
+app.use('/currency-data', currencyRoutes)
 
 app.use('/', (req, res, next) => {
     return res.status(200).json({

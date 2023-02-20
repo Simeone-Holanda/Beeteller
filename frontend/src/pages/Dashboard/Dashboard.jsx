@@ -3,7 +3,55 @@ import CardCoin from './components/CardCoin/CardCoin'
 import SelectCoin from './components/SelectCoin/SelectCoin'
 import LoadIcon from '../../assets/load_icon.png'
 import TableCoin from "./components/TableCoin/TableCoin";
+import { useEffect, useState } from "react";
+import currencyService from '../../services/currencyService'
+
 const Dashboard = () => {
+
+    const [dataTable, setDataTable] = useState([])
+    const [cards, setCards] = useState([
+        { symbol: 'USDBRL', pairOfCrypton: 'BRL / USD', value: '0,00', description: 'Dolar turismo', type: 'Dolar' },
+        { symbol: 'BTCEUR', pairOfCrypton: 'BTC / EUR', value: '0,00', description: '', type: 'Bitcoin' },
+        { symbol: 'BTCUSD', pairOfCrypton: 'BTC / USD', value: '0,00', description: '', type: 'Bitcoin' }
+    ])
+
+    async function getDataTable() {
+        return await currencyService.getHistoricalCurrency()
+    }
+
+    async function getDataCard() {
+        return await currencyService.getCurrencyQuote()
+    }
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                let table = await getDataTable()
+                let cardsData = await getDataCard()
+                let newCarsds = cards.map(card => {
+                    if (card.symbol === 'USDBRL') {
+                        return { ...card, value: cardsData['data'][card.symbol]['bid'] }
+                    }
+                    else if (card.symbol === 'BTCEUR') {
+                        return { ...card, value: cardsData['data'][card.symbol]['bid'] }
+                    }
+                    else if (card.symbol === 'BTCUSD') {
+                        return { ...card, value: cardsData['data'][card.symbol]['bid'] }
+                    }
+                })
+                console.log('table')
+                console.log(table)
+                setCards(newCarsds)
+                setDataTable(table['data'])
+            } catch (error) {
+                console.log(error)
+                alert('Algo deu errado! ')
+            }
+
+        }
+        fetchData()
+    }, [])
+
     return (<>
         <Box m={'auto'} maxWidth={'1170px'}>
             <Flex
@@ -14,9 +62,13 @@ const Dashboard = () => {
                 <Image src={LoadIcon} alt='Atualizar' w={'22px'} h={'18px'} cursor={'pointer'} />
             </Flex>
             <Flex justifyContent={'space-between'}>
-                <CardCoin pairOfCrypton={'BTC / BRL'} value={'5,30'} description={'Dolar turismo'} type={'Dolar'} />
-                <CardCoin pairOfCrypton={'BTC / EUR'} value={'3732,09'} type={''} />
-                <CardCoin pairOfCrypton={'BTC / USD'} value={'4241,60'} type={''} />
+                {cards.map(card => (
+                    <CardCoin
+                        pairOfCrypton={card.pairOfCrypton}
+                        value={card.value}
+                        description={card.description}
+                        type={card.type} />
+                ))}
             </Flex>
             <Flex
                 justifyContent={'space-between'}
@@ -25,23 +77,7 @@ const Dashboard = () => {
                 <Text align={'start'} fontSize={'36px'} fontWeight={'bold'}>Cotações</Text>
                 <SelectCoin />
             </Flex>
-            <TableCoin currencys={
-                [
-                    {
-                        currency: 'Dolár Americano',
-                        date: new Date(),
-                        min: '5.5451',
-                        max: '5.5507',
-                        var: 1
-                    },
-                    {
-                        currency: 'Dolár Americano',
-                        date: new Date(),
-                        min: '5.5451',
-                        max: '5.5507',
-                        var: -1
-                    },
-                ]} />
+            <TableCoin currencys={dataTable} />
         </Box>
     </>);
 }

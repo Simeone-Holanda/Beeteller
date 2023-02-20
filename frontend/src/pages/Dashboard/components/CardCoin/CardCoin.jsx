@@ -3,6 +3,7 @@ import DolarIcon from '../../../../assets/dolar_icon.png'
 import BitcoinIcon from '../../../../assets/btc_icon.png'
 
 const CardCoin = ({ pairOfCrypton, value, description, type }) => {
+    console.log({ pairOfCrypton, value, description, type })
     return (
         <Flex
             w={'369px'}

@@ -1,7 +1,6 @@
 import { Flex, Image, Square, Table, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
 import IconOrdem from '../../../../assets/button_icon.png'
 import DolarIcon from '../../../../assets/dolar_icon.png'
-import BTCIcon from '../../../../assets/btc_icon.png'
 import dayjs from 'dayjs';
 
 const TableCoin = ({ currencys }) => {
@@ -10,13 +9,13 @@ const TableCoin = ({ currencys }) => {
     function variation(value) {
         return (
             <Square
-                w={'60px'}
+                w={'66px'}
                 h={'37px'}
-                bg={value > 0 ? 'yellowButton' : '#grayDivTable'}
+                bg={value > 0 ? 'yellowButton' : 'grayDivTable'}
                 borderRadius={'8px'}>
                 <Flex>
-                    <Text fontSize={'18px'}>
-                        {value > 0 ? '+' : '-'} {Math.abs(value)}
+                    <Text fontSize={'18px'} fontWeight={'bold'}>
+                        {value > 0 ? '+' : '-'}{Math.abs(value)}
                     </Text>
                     <Text fontSize={'18px'}>
                         %
@@ -68,7 +67,7 @@ const TableCoin = ({ currencys }) => {
                 </Tr>
             </Thead>
             <Tbody>
-                {currencys.map(e => <Tr>
+                {currencys ? currencys.map(e => <Tr>
                     <Td>
                         <Flex>
                             <Square>
@@ -77,10 +76,10 @@ const TableCoin = ({ currencys }) => {
                             <Square marginLeft={'9px'}>
                                 <Flex direction={'column'}>
                                     <Text color={'text'} fontSize={'18px'} fontWeight={'bold'}>
-                                        {e.currency}
+                                        {currencys[0].name}
                                     </Text>
                                     <Text color={'softGray'} fontSize={'18px'}>
-                                        {dayjs(e.date).format('DD/MM/YYYY')}
+                                        {dayjs(new Date(parseInt(e.timestamp) * 1000)).format('DD/MM/YYYY')}
                                     </Text>
                                 </Flex>
                             </Square>
@@ -92,7 +91,7 @@ const TableCoin = ({ currencys }) => {
                             justifyContent={'center'}
                             align={'center'}>
                             <Text fontWeight={'bold'}>
-                                {e.min}
+                                {e.low}
                             </Text>
                         </Flex>
                     </Td>
@@ -101,7 +100,7 @@ const TableCoin = ({ currencys }) => {
                             w={'100%'}
                             align={'center'}>
                             <Text fontWeight={'bold'}>
-                                {e.max}
+                                {e.high}
                             </Text>
                         </Flex>
                     </Td>
@@ -111,13 +110,12 @@ const TableCoin = ({ currencys }) => {
                             justifyContent={'flex-end'}
                             align={'center'}>
                             <Text fontWeight={'bold'}>
-                                {variation(e.var)}
-
+                                {variation(parseFloat(e.pctChange))}
                             </Text>
                         </Flex>
                     </Td>
                 </Tr>)
-                }
+                    : <Tr></Tr>}
             </Tbody >
         </Table >
     );

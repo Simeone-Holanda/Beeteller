@@ -1,9 +1,21 @@
-import { Box, Divider, Flex, Image, Square, Text } from "@chakra-ui/react";
+import { Box, Divider, Flex, Image, Select, Square, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import LogoBeeteller from '../../assets/Logo_Beeteller.png'
 import Vector from '../../assets/Vector.png'
+import { i18n } from '../../translate/i18n';
+
+const I18N_STORAGE_KEY = 'i18nextLng'
+
 const NabBar = () => {
-    const [language, setLanguage] = useState(true)
+    const [language, setLanguage] = useState(localStorage.getItem(I18N_STORAGE_KEY))
+
+    function handleLanguageChange(event) {
+        localStorage.setItem(
+            I18N_STORAGE_KEY, event.target.value
+        )
+        i18n.changeLanguage(event.target.value)
+        window.location = window.location
+    }
 
     return (
         <Box boxShadow={'0px 4px 20px rgba(0, 0, 0, 0.15)'}>
@@ -27,11 +39,11 @@ const NabBar = () => {
                         <Image src={Vector} />
                     </Square>
                 </Flex>
-                {/* TODO: ADICIONAR A LINGUAGEM AO LOCALSTORAGE */}
-                <Box onClick={() => setLanguage(prev => !prev)}>
-                    <Text cursor={'pointer'}>
-                        {language ? 'EN' : 'PT'}
-                    </Text>
+                <Box>
+                    <Select defaultValue={language} cursor={'pointer'} onChange={handleLanguageChange}>
+                        <option value={'en'}>EN</option>
+                        <option value={'pt'}>PT</option>
+                    </Select>
                 </Box>
             </Flex>
         </Box>

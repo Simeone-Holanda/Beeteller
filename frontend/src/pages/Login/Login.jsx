@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ScreenLogin from '../../assets/ScreenLogin.png'
 import { AuthContext } from '../../contexts/AuthContext'
 import authService from '../../services/authService'
+import { i18n } from '../../translate/i18n'
 
 const Login = () => {
 
@@ -58,13 +59,13 @@ const Login = () => {
                                 direction={'column'}
                                 align={'center'}>
                                 <Text color={'text'} fontSize={'36px'}>
-                                    Olá! Bem vindo de volta
+                                    {i18n.t('titles.login')}
                                 </Text>
                                 <Text color={'softGray'} fontSize={'24px'}>
-                                    Faça login com seus dados inseridos
+                                    {i18n.t('subtitles.loginPar1')}
                                 </Text>
                                 <Text color={'softGray'} fontSize={'24px'}>
-                                    durante o seu registro.
+                                    {i18n.t('subtitles.loginPar2')}
                                 </Text>
                             </Flex>
                         </Box>
@@ -77,20 +78,22 @@ const Login = () => {
                             <Flex
                                 marginTop={'10px'}
                                 justifyContent={'space-between'}>
-                                <Text align={'start'} fontSize={'14px'} fontWeight={'bold'}>Senha </Text>
+                                <Text align={'start'} fontSize={'14px'} fontWeight={'bold'}>{i18n.t('inputs.password')} </Text>
                                 <Text
                                     align={'start'}
                                     fontSize={'14px'}
                                     fontWeight={'bold'}
                                     color={'yellowButton'}
                                     cursor={'pointer'}>
-                                    Esqueceu a senha
+                                    {i18n.t('navigationPageLink.forgot_password')}
                                 </Text>
                             </Flex>
                             <Input type={'password'} placeholder={'Enter password'} h={'56px'} onChange={(e) => {
                                 setData({ ...data, password: e.target.value })
                             }} />
-                            <Button w={'100%'} mt={'35px'} bg={'yellowButton'} h={'56px'} onClick={handleClick}> Login</Button>
+                            <Button w={'100%'} mt={'35px'} bg={'yellowButton'} h={'56px'} onClick={handleClick}>
+                                {i18n.t('buttons.login')}
+                            </Button>
                         </Box>
                     </Flex>
 

@@ -1,6 +1,7 @@
 import { Flex, Image, Square, Table, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
 import IconOrdem from '../../../../assets/button_icon.png'
 import DolarIcon from '../../../../assets/dolar_icon.png'
+import { i18n } from '../../../../translate/i18n'
 import dayjs from 'dayjs';
 
 const TableCoin = ({ currencys }) => {
@@ -32,7 +33,7 @@ const TableCoin = ({ currencys }) => {
                         <Flex
                             w={'100%'}
                             align={'center'}>
-                            Moeda
+                            {i18n.t('table.coin')}
                             <Image src={IconOrdem} cursor={'pointer'} />
                         </Flex>
                     </Th>
@@ -41,7 +42,7 @@ const TableCoin = ({ currencys }) => {
                             w={'100%'}
                             justifyContent={'center'}
                             align={'center'}>
-                            Mínima
+                            {i18n.t('table.min')}
                             <Image src={IconOrdem} cursor={'pointer'} />
                         </Flex>
                     </Th>
@@ -49,7 +50,7 @@ const TableCoin = ({ currencys }) => {
                         <Flex
                             w={'100%'}
                             align={'center'}>
-                            Máxima
+                            {i18n.t('table.max')}
                             <Image src={IconOrdem} cursor={'pointer'} />
                         </Flex>
                     </Th>
@@ -58,7 +59,7 @@ const TableCoin = ({ currencys }) => {
                             w={'100%'}
                             justifyContent={'flex-end'}
                             align={'center'}>
-                            Variação
+                            {i18n.t('table.variation')}
                             <Image src={IconOrdem} cursor={'pointer'} />
                         </Flex>
                     </Th>

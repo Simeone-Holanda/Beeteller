@@ -5,6 +5,7 @@ import LoadIcon from '../../assets/load_icon.png'
 import TableCoin from "./components/TableCoin/TableCoin";
 import { useEffect, useState } from "react";
 import currencyService from '../../services/currencyService'
+import { i18n } from '../../translate/i18n'
 
 const Dashboard = () => {
 
@@ -73,7 +74,13 @@ const Dashboard = () => {
                 alignItems={'center'}
                 marginY={'30px'}
             >
-                <Text align={'start'} fontSize={'36px'} fontWeight={'bold'} color={'text'}>Moedas</Text>
+                <Text
+                    align={'start'}
+                    fontSize={'36px'}
+                    fontWeight={'bold'}
+                    color={'text'}>
+                    {i18n.t('dashboard.coins')}
+                </Text>
                 <Image src={LoadIcon} alt='Atualizar' w={'22px'} h={'18px'} cursor={'pointer'} onClick={handleClickUpdate} />
             </Flex>
 
@@ -92,7 +99,9 @@ const Dashboard = () => {
                 alignItems={'center'}
                 marginY={'30px'}
             >
-                <Text align={'start'} fontSize={'36px'} fontWeight={'bold'}>Cotações</Text>
+                <Text align={'start'} fontSize={'36px'} fontWeight={'bold'}>
+                    {i18n.t('dashboard.quotation')}
+                </Text>
                 <SelectCoin selectCurrency={handleSelectCurrency} />
             </Flex>
             <TableCoin currencys={dataTable} />

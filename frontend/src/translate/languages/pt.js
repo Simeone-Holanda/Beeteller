@@ -6,7 +6,8 @@ const messages = {
                 register: 'Olá! Cadastra-se.'
             },
             subtitles: {
-                login: 'Faça login com seus dados inseridos durante o seu registro.',
+                loginPar1: 'Faça login com seus dados inseridos',
+                loginPar2: 'durante o seu registro.',
                 register: 'Preencha os dados abaixo para concluir o cadastro..'
             },
             navigationPageLink: {

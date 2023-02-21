@@ -5,5 +5,5 @@ const messages = {
     ...portugueseMessages,
     ...englishMessages
 }
-
+console.log(messages)
 export { messages }

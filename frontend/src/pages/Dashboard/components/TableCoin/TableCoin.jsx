@@ -4,7 +4,6 @@ import DolarIcon from '../../../../assets/dolar_icon.png'
 import dayjs from 'dayjs';
 
 const TableCoin = ({ currencys }) => {
-    console.log(currencys)
 
     function variation(value) {
         return (
@@ -14,14 +13,13 @@ const TableCoin = ({ currencys }) => {
                 bg={value > 0 ? 'yellowButton' : 'grayDivTable'}
                 borderRadius={'8px'}>
                 <Flex>
-                    <Text fontSize={'18px'} fontWeight={'bold'}>
+                    <Text fontSize={'18px'}>
                         {value > 0 ? '+' : '-'}{Math.abs(value)}
                     </Text>
                     <Text fontSize={'18px'}>
                         %
                     </Text>
                 </Flex>
-
             </Square>
         )
     }
@@ -67,7 +65,7 @@ const TableCoin = ({ currencys }) => {
                 </Tr>
             </Thead>
             <Tbody>
-                {currencys ? currencys.map(e => <Tr>
+                {currencys ? currencys.map((e, indice) => <Tr key={indice}>
                     <Td>
                         <Flex>
                             <Square>
@@ -109,9 +107,7 @@ const TableCoin = ({ currencys }) => {
                             w={'100%'}
                             justifyContent={'flex-end'}
                             align={'center'}>
-                            <Text fontWeight={'bold'}>
-                                {variation(parseFloat(e.pctChange))}
-                            </Text>
+                            {variation(parseFloat(e.pctChange))}
                         </Flex>
                     </Td>
                 </Tr>)

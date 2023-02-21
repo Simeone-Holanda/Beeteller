@@ -2,11 +2,11 @@ import { api, requestConfig } from "../utils/config";
 
 
 // Get historical from 15 days
-const getHistoricalCurrency = async (data, token) => {
+const getHistoricalCurrency = async (data, params, token) => {
     const config = requestConfig("GET", data); // token cai aq
 
     try {
-        const res = await fetch(`${api}/currency-data/table`, config)
+        const res = await fetch(`${api}/currency-data/table/${params.symbol}/${params.quantity}`, config)
         let data = await res.json()
         data.statusCode = res.status
         if (data.token) {

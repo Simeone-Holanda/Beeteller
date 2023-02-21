@@ -1,15 +1,12 @@
 import { Select } from "@chakra-ui/react";
 import { useState } from "react";
 
-const SelectCoin = () => {
+const SelectCoin = ({ selectCurrency }) => {
     const [currency, setCurrency] = useState('Dolar Americano')
 
     function handleSelection(e) {
-        setCurrency(e.target.value)
+        selectCurrency(e.target.value)
     }
-
-    console.log(currency)
-
 
     return (
         <Select
@@ -17,9 +14,10 @@ const SelectCoin = () => {
             cursor={'pointer'}
             w={'189px'}
             h={'40px'}
+            defaultValue={'Dolar Americano'}
         // _focus={{ boxShadow: "none" }}
         >
-            <option value="Dolar Americano" selected>Dolar Americano</option>
+            <option value="Dolar Americano">Dolar Americano</option>
             <option value="Euro">Euro</option>
             <option value="Bitcoin">Bitcoin</option>
         </Select>

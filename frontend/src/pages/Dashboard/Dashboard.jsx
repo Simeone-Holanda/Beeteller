@@ -16,15 +16,15 @@ const Dashboard = () => {
         { symbol: 'BTCUSD', pairOfCrypton: 'BTC / USD', value: '0,00', description: '', type: 'Bitcoin' }
     ])
 
-    async function getDataTable() {
-        return await currencyService.getHistoricalCurrency()
+    async function getDataTable(symbol, quantity) {
+        return await currencyService.getHistoricalCurrency(null, { symbol, quantity })
     }
 
     async function getDataCard() {
         return await currencyService.getCurrencyQuote()
     }
 
-    async function handleClick(e) {
+    async function handleClickUpdate(e) {
         e.preventDefault()
         // setUpdateCard(prev => !prev)
         let cardsData = await getDataCard()
@@ -34,10 +34,23 @@ const Dashboard = () => {
         setCards(newCarsds)
     }
 
+    async function handleSelectCurrency(currency) {
+        // setUpdateCard(prev => !prev)
+        let table = ''
+        if (currency === 'Dolar Americano') {
+            table = await getDataTable('USD-BRL', 15)
+        } else if (currency === 'Euro') {
+            table = await getDataTable('BTC-EUR', 15)
+        } else if (currency === 'Bitcoin') {
+            table = await getDataTable('BTC-USD', 15)
+        }
+        setDataTable(table['data'])
+    }
+
     useEffect(() => {
         async function fetchData() {
             try {
-                let table = await getDataTable()
+                let table = await getDataTable('USD-BRL', 15)
                 let cardsData = await getDataCard()
                 let newCarsds = cards.map(card => {
                     return { ...card, value: cardsData['data'][card.symbol]['bid'] }
@@ -61,12 +74,13 @@ const Dashboard = () => {
                 marginY={'30px'}
             >
                 <Text align={'start'} fontSize={'36px'} fontWeight={'bold'} color={'text'}>Moedas</Text>
-                <Image src={LoadIcon} alt='Atualizar' w={'22px'} h={'18px'} cursor={'pointer'} onClick={handleClick} />
+                <Image src={LoadIcon} alt='Atualizar' w={'22px'} h={'18px'} cursor={'pointer'} onClick={handleClickUpdate} />
             </Flex>
 
             <Flex justifyContent={'space-between'}>
-                {cards.map(card => (
+                {cards.map((card, index) => (
                     <CardCoin
+                        key={index}
                         pairOfCrypton={card.pairOfCrypton}
                         value={card.value}
                         description={card.description}
@@ -79,7 +93,7 @@ const Dashboard = () => {
                 marginY={'30px'}
             >
                 <Text align={'start'} fontSize={'36px'} fontWeight={'bold'}>Cotações</Text>
-                <SelectCoin />
+                <SelectCoin selectCurrency={handleSelectCurrency} />
             </Flex>
             <TableCoin currencys={dataTable} />
         </Box>

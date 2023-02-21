@@ -4,16 +4,16 @@ import axios from 'axios'
 
 export class GetCurrencyDataUserUseCase {
     private urlTable = 'https://economia.awesomeapi.com.br/json/daily'
-    
+
     constructor() { }
 
-    async getHistoricalCurrencyData(pier: string, quantity: number = 10) {
+    async getHistoricalCurrencyData(pier: string, quantity: number) {
         return await axios.get(`${this.urlTable}/${pier}/${quantity}`)
     }
 
-    async execute() {
+    async execute(symbol: string, quantity: number = 15) {
         try {
-            let currencyData = await this.getHistoricalCurrencyData('USD-BRL', 15)
+            let currencyData = await this.getHistoricalCurrencyData(symbol, quantity)
             console.log(currencyData['data'])
             return currencyData['data']
         } catch (error) {

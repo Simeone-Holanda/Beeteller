@@ -10,7 +10,7 @@ userRouter.get('/card', (request: Request, response: Response) => {
     return getCurrencyQuoteController.handle(request, response)
 })
 
-userRouter.get('/table', (request: Request, response: Response) => {
+userRouter.get('/table/:symbol/:quantity', (request: Request, response: Response) => {
     return getCurrencyDataController.handle(request, response)
 })
 

@@ -8,7 +8,9 @@ export class GetCurrencyDataController {
 
     async handle(request: Request, response: Response): Promise<Response> {
         try {
-            const data = await this.getCurrencyDataUserUseCase.execute()
+            let symbol = request.params.symbol
+            let quantity = request.params.quantity ? parseInt(request.params.quantity) : undefined
+            const data = await this.getCurrencyDataUserUseCase.execute(symbol, quantity)
             console.log('data')
             console.log(data)
             return response.status(200).send({ data })

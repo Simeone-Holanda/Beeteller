@@ -9,8 +9,6 @@ export class GetCurrencyQuoteController {
     async handle(request: Request, response: Response): Promise<Response> {
         try {
             const data = await this.getCurrencyDataUserUseCase.execute()
-            console.log('data')
-            console.log(data)
             return response.status(200).send({ data })
         }
         catch (error) {

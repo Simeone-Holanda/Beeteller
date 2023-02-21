@@ -12,7 +12,6 @@ export class GetCurrencyQuoteUserUseCase {
     async execute() {
         try {
             let currentQuote = await this.getCurrentQuote('USD-BRL,BTC-USD,BTC-EUR')
-            console.log(currentQuote['data'])
             return currentQuote['data']
         } catch (error) {
             console.log(error)

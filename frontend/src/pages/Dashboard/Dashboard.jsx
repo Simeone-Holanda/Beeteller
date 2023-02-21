@@ -10,6 +10,9 @@ import { i18n } from '../../translate/i18n'
 const Dashboard = () => {
 
     const [dataTable, setDataTable] = useState([])
+    const [orders, setOrders] = useState({
+        timestamp: true, low: true, high: true, varBid: true
+    })
 
     const [cards, setCards] = useState([
         { symbol: 'USDBRL', pairOfCrypton: 'BRL / USD', value: '0,00', description: 'Dolar turismo', type: 'Dolar' },
@@ -23,6 +26,29 @@ const Dashboard = () => {
 
     async function getDataCard() {
         return await currencyService.getCurrencyQuote()
+    }
+
+    function dataOrder(column) {
+        let newData = dataTable.slice().sort((a, b) => {
+            if (a[column] < b[column]) {
+                return -1;
+            }
+            if (a[column] > b[column]) {
+                return 1;
+            }
+            return 0;
+        })
+
+        if (orders[column]) {
+            newData[0].name = dataTable[0].name
+            setDataTable(newData)
+        } else {
+            newData = newData.reverse()
+            newData[0].name = dataTable[0].name
+            setDataTable(newData)
+        }
+
+        setOrders({ ...orders, [column]: !orders[column] })
     }
 
     async function handleClickUpdate(e) {
@@ -104,7 +130,7 @@ const Dashboard = () => {
                 </Text>
                 <SelectCoin selectCurrency={handleSelectCurrency} />
             </Flex>
-            <TableCoin currencys={dataTable} />
+            <TableCoin currencys={dataTable} dataOrder={dataOrder} />
         </Box>
     </>);
 }

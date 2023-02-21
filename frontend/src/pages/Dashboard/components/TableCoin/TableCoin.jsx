@@ -3,8 +3,15 @@ import IconOrdem from '../../../../assets/button_icon.png'
 import DolarIcon from '../../../../assets/dolar_icon.png'
 import { i18n } from '../../../../translate/i18n'
 import dayjs from 'dayjs';
+import { useEffect, useState } from "react";
 
-const TableCoin = ({ currencys }) => {
+const TableCoin = ({ currencys, dataOrder }) => {
+
+    const [data, setData] = useState(null)
+
+    useEffect(() => {
+        setData(currencys)
+    }, [currencys])
 
     function variation(value) {
         return (
@@ -25,6 +32,8 @@ const TableCoin = ({ currencys }) => {
         )
     }
 
+    console.log(currencys)
+
     return (
         <Table variant="simple">
             <Thead>
@@ -34,7 +43,7 @@ const TableCoin = ({ currencys }) => {
                             w={'100%'}
                             align={'center'}>
                             {i18n.t('table.coin')}
-                            <Image src={IconOrdem} cursor={'pointer'} />
+                            <Image src={IconOrdem} cursor={'pointer'} onClick={() => dataOrder('timestamp', data)} />
                         </Flex>
                     </Th>
                     <Th>
@@ -43,7 +52,7 @@ const TableCoin = ({ currencys }) => {
                             justifyContent={'center'}
                             align={'center'}>
                             {i18n.t('table.min')}
-                            <Image src={IconOrdem} cursor={'pointer'} />
+                            <Image src={IconOrdem} cursor={'pointer'} onClick={() => dataOrder('low', data)} />
                         </Flex>
                     </Th>
                     <Th>
@@ -51,7 +60,7 @@ const TableCoin = ({ currencys }) => {
                             w={'100%'}
                             align={'center'}>
                             {i18n.t('table.max')}
-                            <Image src={IconOrdem} cursor={'pointer'} />
+                            <Image src={IconOrdem} cursor={'pointer'} onClick={() => dataOrder('high', data)} />
                         </Flex>
                     </Th>
                     <Th>
@@ -60,13 +69,13 @@ const TableCoin = ({ currencys }) => {
                             justifyContent={'flex-end'}
                             align={'center'}>
                             {i18n.t('table.variation')}
-                            <Image src={IconOrdem} cursor={'pointer'} />
+                            <Image src={IconOrdem} cursor={'pointer'} onClick={() => dataOrder('varBid', data)} />
                         </Flex>
                     </Th>
                 </Tr>
             </Thead>
             <Tbody>
-                {currencys ? currencys.map((e, indice) => <Tr key={indice}>
+                {data ? data.map((e, indice) => <Tr key={indice}>
                     <Td>
                         <Flex>
                             <Square>

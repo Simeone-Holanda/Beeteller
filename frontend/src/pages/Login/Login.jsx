@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Input, Square, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Input, Square, Text } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ScreenLogin from '../../assets/ScreenLogin.png'
@@ -11,7 +11,7 @@ const Login = () => {
     const [error, setError] = useState()
     const navigate = useNavigate();
 
-    const { auth, setAuth } = useContext(AuthContext)
+    const { AuthLogin } = useContext(AuthContext)
 
     async function handleClick(e) {
         e.preventDefault();
@@ -21,7 +21,8 @@ const Login = () => {
                 if (loginUser.statusCode >= 400) {
                     alert(loginUser.error)
                 } else {
-                    setAuth(true)
+                    console.log(loginUser)
+                    AuthLogin(loginUser['token'])
                     navigate('/dashboard')
                 }
             } else {
@@ -29,6 +30,7 @@ const Login = () => {
                 setError('Por favor insira os dados de email e senha. ')
             }
         } catch (error) {
+            console.log(error)
             alert('Algo deu errado verifique se seus dados estão corretos. ')
             setError('Algo deu errado verifique se seus dados estão corretos. ')
         }
@@ -36,51 +38,65 @@ const Login = () => {
     }
 
     return (
-        <Flex
-            w={'100%'}
-            h={'80%'}
-            bg={'red'}>
-            <Square w={`50%`} bg={'red'}>
-                <img src={ScreenLogin} alt="Imagem de fundo" />
-            </Square>
-            <Square w={`50%`} bg={'container'}>
-                <Flex
-                    direction={'column'}
-                    align={'center'}>
-                    <Text color={'text'} fontSize={'36px'}>
-                        Olá! Bem vindo de volta
-                    </Text>
-                    <Text color={'softGray'} fontSize={'24px'}>
-                        Faça login com seus dados inseridos
-                    </Text>
-                    <Text color={'softGray'} fontSize={'24px'}>
-                        durante o seu registro.
-                    </Text>
-                    <Box w={'100%'}>
-                        <Text align={'start'} fontSize={'14px'} fontWeight={'bold'}>E-mail </Text>
-                        <Input type={'text'} placeholder={'Exemplo@email.com'} onChange={(e) => {
-                            setData({ ...data, email: e.target.value })
-                        }} />
-                        <Flex
-                            justifyContent={'space-between'}>
-                            <Text align={'start'} fontSize={'14px'} fontWeight={'bold'}>Senha </Text>
-                            <Text
-                                align={'start'}
-                                fontSize={'14px'}
-                                fontWeight={'bold'}
-                                color={'yellowButton'}>
-                                Esqueceu a senha
-                            </Text>
-                        </Flex>
-                        <Input type={'password'} placeholder={'Enter password'} onChange={(e) => {
-                            setData({ ...data, password: e.target.value })
-                        }} />
-                        <Button w={'100%'} mt={'15px'} onClick={handleClick}> Login</Button>
-                    </Box>
-                </Flex>
+        <Box maxHeight={'500px'}>
+            <Flex
+                w={'100%'}
+                h={'80%'}
+                bg={'red'}>
+                <Square w={`50%`} bg={'red'}>
+                    <Image src={ScreenLogin} alt="Imagem de fundo" w={'100%'} />
+                </Square>
+                <Square w={`50%`} bg={'container'}>
+                    <Flex
+                        h={'65%'}
+                        direction={'column'}
+                        align={'center'}
+                        justifyContent={'flex-start'}>
+                        <Box>
+                            <Flex
+                                marginBottom={'55px'}
+                                direction={'column'}
+                                align={'center'}>
+                                <Text color={'text'} fontSize={'36px'}>
+                                    Olá! Bem vindo de volta
+                                </Text>
+                                <Text color={'softGray'} fontSize={'24px'}>
+                                    Faça login com seus dados inseridos
+                                </Text>
+                                <Text color={'softGray'} fontSize={'24px'}>
+                                    durante o seu registro.
+                                </Text>
+                            </Flex>
+                        </Box>
+                        <Box w={'100%'}>
+                            <Text align={'start'} fontSize={'14px'} fontWeight={'bold'}>E-mail </Text>
 
-            </Square >
-        </Flex >);
+                            <Input type={'text'} placeholder={'Exemplo@email.com'} h={'56px'} onChange={(e) => {
+                                setData({ ...data, email: e.target.value })
+                            }} />
+                            <Flex
+                                marginTop={'10px'}
+                                justifyContent={'space-between'}>
+                                <Text align={'start'} fontSize={'14px'} fontWeight={'bold'}>Senha </Text>
+                                <Text
+                                    align={'start'}
+                                    fontSize={'14px'}
+                                    fontWeight={'bold'}
+                                    color={'yellowButton'}
+                                    cursor={'pointer'}>
+                                    Esqueceu a senha
+                                </Text>
+                            </Flex>
+                            <Input type={'password'} placeholder={'Enter password'} h={'56px'} onChange={(e) => {
+                                setData({ ...data, password: e.target.value })
+                            }} />
+                            <Button w={'100%'} mt={'35px'} bg={'yellowButton'} h={'56px'} onClick={handleClick}> Login</Button>
+                        </Box>
+                    </Flex>
+
+                </Square >
+            </Flex >
+        </Box>)
 }
 
 export default Login;

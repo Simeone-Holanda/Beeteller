@@ -1,14 +1,10 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Dashboard from "../pages/Dashboard/Dashboard";
+import { useContext } from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 const PrivateRoutes = () => {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path='/dashboard' element={<Dashboard />} />
-            </Routes>
-        </BrowserRouter>
-    );
+    const { checkLoggedInUser } = useContext(AuthContext)
+    return checkLoggedInUser() ? <Outlet /> : <Navigate to="/" />;
 }
 
 export default PrivateRoutes;

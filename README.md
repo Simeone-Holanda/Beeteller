@@ -1,4 +1,4 @@
-# currency-quote
+# Testa da Beeteller
 Teste para vaga de desenvolvedor Full Stack. A descrição do desafio pode ser encontrada <a href='https://github.com/beetellergroup/selecao-full-stack'>Aqui</a> . 
 
 ### Você pode acessa a aplicação rodando em live nesse 

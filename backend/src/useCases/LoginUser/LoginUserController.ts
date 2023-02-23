@@ -10,7 +10,7 @@ export class LoginUserController {
         try {
             const { email, password } = request.body
             if (!(email && password)) {
-                throw new AppError('All input is required. ')
+                throw new AppError('Todos os campos são obrigatório. ')
             }
             const data = await this.loginUser.execute({ email, password })
             return response.status(200).send({ token: data })

@@ -4,7 +4,6 @@ export const AuthContext = createContext()
 
 function AuthProvider({ children }) {
     const [authToken, setAuthToken] = useState(null)
-    console.log('aq')
 
     const checkLoggedInUser = () => {
         const storageToken = localStorage.getItem("token");
@@ -24,8 +23,17 @@ function AuthProvider({ children }) {
         }
     };
 
+    const Logout = async () => {
+        try {
+            setAuthToken()
+            localStorage.removeItem('token')
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
-        <AuthContext.Provider value={{ authToken, AuthLogin, checkLoggedInUser }}>
+        <AuthContext.Provider value={{ authToken, AuthLogin, checkLoggedInUser, Logout }}>
             {children}
         </AuthContext.Provider>
     )

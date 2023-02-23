@@ -3,9 +3,12 @@ import CardCoin from './components/CardCoin/CardCoin'
 import SelectCoin from './components/SelectCoin/SelectCoin'
 import LoadIcon from '../../assets/load_icon.png'
 import TableCoin from "./components/TableCoin/TableCoin";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import currencyService from '../../services/currencyService'
 import { i18n } from '../../translate/i18n'
+import { FiLogOut } from 'react-icons/fi'
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../../contexts/AuthContext'
 
 const Dashboard = () => {
 
@@ -13,6 +16,8 @@ const Dashboard = () => {
     const [orders, setOrders] = useState({
         timestamp: true, low: true, high: true, varBid: true
     })
+    const navigate = useNavigate();
+    const { Logout } = useContext(AuthContext)
 
     const [cards, setCards] = useState([
         { symbol: 'USDBRL', pairOfCrypton: 'BRL / USD', value: '0,00', description: 'Dolar turismo', type: 'Dolar' },
@@ -74,6 +79,11 @@ const Dashboard = () => {
         setDataTable(table['data'])
     }
 
+    function logout() {
+        Logout()
+        navigate('/')
+    }
+
     useEffect(() => {
         async function fetchData() {
             try {
@@ -86,7 +96,7 @@ const Dashboard = () => {
                 setDataTable(table['data'])
             } catch (error) {
                 console.log(error)
-                alert('Algo deu errado! ')
+                navigate('/')
             }
 
         }
@@ -107,7 +117,13 @@ const Dashboard = () => {
                     color={'text'}>
                     {i18n.t('dashboard.coins')}
                 </Text>
-                <Image src={LoadIcon} alt='Atualizar' w={'22px'} h={'18px'} cursor={'pointer'} onClick={handleClickUpdate} />
+                <Box>
+                    <Flex>
+                        <Image src={LoadIcon} alt='Atualizar' w={'22px'} h={'18px'} cursor={'pointer'} onClick={handleClickUpdate} marginRight={'10px'} />
+                        <FiLogOut w={'22px'} h={'18px'} cursor={'pointer'} onClick={logout}/>
+                    </Flex>
+
+                </Box>
             </Flex>
 
             <Flex

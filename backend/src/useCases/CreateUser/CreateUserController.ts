@@ -11,10 +11,10 @@ export class CreateUserController {
         try {
             const { email, password, username } = request.body
             if (!(email && password && username)) {
-                throw new AppError('All input is required. ')
+                throw new AppError('Todos os campos são obrigatório. ')
             }
             await this.createUserUseCase.execute({ email, password, username })
-            return response.status(201).send({ message: "Todos os campos são obrigatório. " })
+            return response.status(201).send({ message: "Usuário cadastrado com sucesso. " })
         }
         catch (error) {
             if (error instanceof AppError) {

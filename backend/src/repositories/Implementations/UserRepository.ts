@@ -1,4 +1,4 @@
-import { IUsersRepository, ILoginUserDTO } from "../Interfaces/IUserRepository";
+import { IUsersRepository, IUserDTO } from "../Interfaces/IUserRepository";
 import User from "../../database/models/user";
 import { UniqueConstraintError, WhereOptions } from "sequelize";
 import AppError from "../../errors/Error";
@@ -17,7 +17,7 @@ export class UsersRepository implements IUsersRepository {
         }
     }
 
-    async save(user: User): Promise<User> {
+    async save(user: IUserDTO): Promise<User> {
         try {
             return await User.create(user)
         } catch (error) {

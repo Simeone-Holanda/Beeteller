@@ -17,9 +17,9 @@ export class UsersRepository implements IUsersRepository {
         }
     }
 
-    async save(user: Users): Promise<Users> {
+    async save(user: User): Promise<User> {
         try {
-            return await Users.create(user)
+            return await User.create(user)
         } catch (error) {
             if (error instanceof UniqueConstraintError) {
                 throw new AppError(`${Object.keys(error.fields)} alredy existe.`)

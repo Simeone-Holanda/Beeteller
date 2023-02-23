@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import User from "./models/user";
-import { config } from '../config/db'
+// import { config } from '../config/db'
 
 const sequelize = new Sequelize({
     database: 'Beeteller',

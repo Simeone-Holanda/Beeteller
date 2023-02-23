@@ -13,7 +13,7 @@ const monitorTypes = {
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-    await queryInterface.bulkInsert('users', [
+    await queryInterface.bulkInsert('Users', [
       {
         id: 'df94f554-4d6d-4ab6-9233-3d0c668b2014',
         username: 'admin',

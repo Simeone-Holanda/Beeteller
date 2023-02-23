@@ -1,16 +1,20 @@
-// let config = {
-//     dialect: 'sqlite',
-//     storage: 'path/to/database.sqlite'
-// }
+require('dotenv/config')
 
-// const dbDialect: string = process.env.DB_DIALECT
-// const dbPath: string = process.env.DB_PATH
-
+const dbDialect = process.env.DIALECT || 'mysql'
+const dbName = process.env.DB_NAME
+const dbUser = process.env.DB_USER
+const dbHost = process.env.DB_HOST
+const dbPort = process.env.DB_PORT
+const dbPassword = process.env.DB_PASSWORD
 
 module.exports = {
-    database: 'Beeteller',
-    dialect: 'sqlite',
-    username: 'root',
-    password: '',
-    storage: './database',
+    development: {
+        username: dbUser,
+        password: dbPassword,
+        database: dbName,
+        host: dbHost,
+        port: dbPort,
+        dialect: dbDialect,
+        timezone: '-03:00'
+    }
 }

@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Image, Input, Square, Text } from "@chakra-ui/react";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ScreenLogin from '../../assets/ScreenLogin.png'
 import { AuthContext } from '../../contexts/AuthContext'
 import authService from '../../services/authService'
@@ -20,22 +20,26 @@ const Login = () => {
             if (data.email && data.password) {
                 let loginUser = await authService.login(data)
                 if (loginUser.statusCode >= 400) {
-                    alert(loginUser.error)
+                    triggerError(loginUser.error)
                 } else {
                     console.log(loginUser)
                     AuthLogin(loginUser['token'])
                     navigate('/dashboard')
                 }
             } else {
-                alert('Por favor insira os dados de email e senha. ')
-                setError('Por favor insira os dados de email e senha. ')
+                triggerError("Por favor insira os dados de email e senha. ")
             }
         } catch (error) {
             console.log(error)
-            alert('Algo deu errado verifique se seus dados estão corretos. ')
-            setError('Algo deu errado verifique se seus dados estão corretos. ')
+            triggerError("Algo deu errado verifique se seus dados estão corretos. ")
         }
 
+    }
+    function triggerError(err) {
+        setError(err)
+        setTimeout(() => {
+            setError('')
+        }, 3000)
     }
 
     return (
@@ -70,6 +74,12 @@ const Login = () => {
                             </Flex>
                         </Box>
                         <Box w={'100%'}>
+                            <Text
+                                color={'red'}
+                                marginTop={['10px', '10px', '16px']}
+                                align={['center', 'center', 'center']}
+                                fontSize={['14px', '14px', '16px']}
+                            >{error ? error : ''}</Text>
                             <Text align={['center', 'center', 'start']} fontSize={['14px', '14px', '16px']} fontWeight={'bold'}>
                                 {i18n.t('inputs.email')}
                             </Text>
@@ -102,6 +112,14 @@ const Login = () => {
                                 onChange={(e) => {
                                     setData({ ...data, password: e.target.value })
                                 }} />
+
+                            <Text
+                                align={'end'}
+                                fontSize={'14px'}
+                                marginTop={['5px', '5px', '8px']}
+                                _hover={{ color: 'yellowButton' }}>
+                                <Link to='/register'>Cadastre-se ?</Link>
+                            </Text>
                             <Button
                                 w={'100%'}
                                 mt={['25px', '25px', '35px']}
@@ -110,6 +128,7 @@ const Login = () => {
                                 onClick={handleClick}>
                                 {i18n.t('buttons.login')}
                             </Button>
+
                         </Box>
                     </Flex>
 

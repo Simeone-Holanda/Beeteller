@@ -23,8 +23,23 @@ const login = async (data) => {
     }
 };
 
+// Register an user
+const register = async (data) => {
+    const config = requestConfig("POST", data);
+
+    try {
+        const res = await fetch(`${api}/account/register`, config)
+        let data = await res.json()
+        data.statusCode = res.status
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 const authService = {
     logout,
+    register,
     login,
 };
 

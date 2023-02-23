@@ -13,4 +13,3 @@ userRouter.post('/register', (request: Request, response: Response) => {
 })
 
 export default userRouter
-[Adicionado e Atualizado]: Criado o useCase de registro de usuários e a cryptografia de senhas do usuário. 

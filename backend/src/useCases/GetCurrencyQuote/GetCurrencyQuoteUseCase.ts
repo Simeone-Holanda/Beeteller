@@ -14,7 +14,6 @@ export class GetCurrencyQuoteUserUseCase {
             let currentQuote = await this.getCurrentQuote('USD-BRL,BTC-USD,BTC-EUR')
             return currentQuote['data']
         } catch (error) {
-            console.log(error)
             throw new AppError(error.message)
         }
 

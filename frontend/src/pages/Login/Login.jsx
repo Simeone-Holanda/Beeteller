@@ -39,59 +39,75 @@ const Login = () => {
     }
 
     return (
-        <Box maxHeight={'500px'}>
+        <Box maxH={'500px'}>
             <Flex
+                flexDir={['column', 'column', 'row']}
                 w={'100%'}
-                h={'80%'}
-                bg={'red'}>
-                <Square w={`50%`} bg={'red'}>
+                h={['100%', '100%', '80%']}>
+                <Square w={['100%', '100%', '50%']}>
                     <Image src={ScreenLogin} alt="Imagem de fundo" w={'100%'} />
                 </Square>
-                <Square w={`50%`} bg={'container'}>
+                <Square w={['100%', '100%', '50%']} bg={'container'}>
                     <Flex
-                        h={'65%'}
-                        direction={'column'}
-                        align={'center'}
-                        justifyContent={'flex-start'}>
+                        h={['100%', '100%', '65%']}
+                        flexDir={'column'}
+                        justify={'flex-start'}
+                        align={['center', 'center', 'flex-start']}>
                         <Box>
                             <Flex
                                 marginBottom={'55px'}
                                 direction={'column'}
                                 align={'center'}>
-                                <Text color={'text'} fontSize={'36px'}>
+                                <Text color={'text'} fontSize={['28px', '28px', '36px']}>
                                     {i18n.t('titles.login')}
                                 </Text>
-                                <Text color={'softGray'} fontSize={'24px'}>
+                                <Text color={'softGray'} fontSize={['18px', '18px', '24px']}>
                                     {i18n.t('subtitles.loginPar1')}
                                 </Text>
-                                <Text color={'softGray'} fontSize={'24px'}>
+                                <Text color={'softGray'} fontSize={['18px', '18px', '24px']}>
                                     {i18n.t('subtitles.loginPar2')}
                                 </Text>
                             </Flex>
                         </Box>
                         <Box w={'100%'}>
-                            <Text align={'start'} fontSize={'14px'} fontWeight={'bold'}>E-mail </Text>
-
-                            <Input type={'text'} placeholder={'Exemplo@email.com'} h={'56px'} onChange={(e) => {
-                                setData({ ...data, email: e.target.value })
-                            }} />
+                            <Text align={['center', 'center', 'start']} fontSize={['14px', '14px', '16px']} fontWeight={'bold'}>
+                                {i18n.t('inputs.email')}
+                            </Text>
+                            <Input
+                                type={'text'}
+                                placeholder={'Exemplo@email.com'}
+                                h={['44px', '44px', '56px']}
+                                onChange={(e) => {
+                                    setData({ ...data, email: e.target.value })
+                                }} />
                             <Flex
-                                marginTop={'10px'}
-                                justifyContent={'space-between'}>
-                                <Text align={'start'} fontSize={'14px'} fontWeight={'bold'}>{i18n.t('inputs.password')} </Text>
+                                marginTop={['10px', '10px', '16px']}
+                                justifyContent={['center', 'center', 'space-between']}>
+                                <Text align={['center', 'center', 'start']} fontSize={['14px', '14px', '16px']} fontWeight={'bold'}>
+                                    {i18n.t('inputs.password')}
+                                </Text>
                                 <Text
-                                    align={'start'}
-                                    fontSize={'14px'}
+                                    align={['center', 'center', 'start']}
+                                    fontSize={['14px', '14px', '16px']}
                                     fontWeight={'bold'}
                                     color={'yellowButton'}
                                     cursor={'pointer'}>
                                     {i18n.t('navigationPageLink.forgot_password')}
                                 </Text>
                             </Flex>
-                            <Input type={'password'} placeholder={'Enter password'} h={'56px'} onChange={(e) => {
-                                setData({ ...data, password: e.target.value })
-                            }} />
-                            <Button w={'100%'} mt={'35px'} bg={'yellowButton'} h={'56px'} onClick={handleClick}>
+                            <Input
+                                type={'password'}
+                                placeholder={'Enter password'}
+                                h={['44px', '44px', '56px']}
+                                onChange={(e) => {
+                                    setData({ ...data, password: e.target.value })
+                                }} />
+                            <Button
+                                w={'100%'}
+                                mt={['25px', '25px', '35px']}
+                                bg={'yellowButton'}
+                                h={['44px', '44px', '56px']}
+                                onClick={handleClick}>
                                 {i18n.t('buttons.login')}
                             </Button>
                         </Box>

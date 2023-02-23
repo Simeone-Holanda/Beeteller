@@ -35,95 +35,97 @@ const TableCoin = ({ currencys, dataOrder }) => {
     console.log(currencys)
 
     return (
-        <Table variant="simple">
-            <Thead>
-                <Tr>
-                    <Th>
-                        <Flex
-                            w={'100%'}
-                            align={'center'}>
-                            {i18n.t('table.coin')}
-                            <Image src={IconOrdem} cursor={'pointer'} onClick={() => dataOrder('timestamp', data)} />
-                        </Flex>
-                    </Th>
-                    <Th>
-                        <Flex
-                            w={'100%'}
-                            justifyContent={'center'}
-                            align={'center'}>
-                            {i18n.t('table.min')}
-                            <Image src={IconOrdem} cursor={'pointer'} onClick={() => dataOrder('low', data)} />
-                        </Flex>
-                    </Th>
-                    <Th>
-                        <Flex
-                            w={'100%'}
-                            align={'center'}>
-                            {i18n.t('table.max')}
-                            <Image src={IconOrdem} cursor={'pointer'} onClick={() => dataOrder('high', data)} />
-                        </Flex>
-                    </Th>
-                    <Th>
-                        <Flex
-                            w={'100%'}
-                            justifyContent={'flex-end'}
-                            align={'center'}>
-                            {i18n.t('table.variation')}
-                            <Image src={IconOrdem} cursor={'pointer'} onClick={() => dataOrder('varBid', data)} />
-                        </Flex>
-                    </Th>
-                </Tr>
-            </Thead>
-            <Tbody>
-                {data ? data.map((e, indice) => <Tr key={indice}>
-                    <Td>
-                        <Flex>
-                            <Square>
-                                <Image src={DolarIcon} />
-                            </Square>
-                            <Square marginLeft={'9px'}>
-                                <Flex direction={'column'}>
-                                    <Text color={'text'} fontSize={'18px'} fontWeight={'bold'}>
-                                        {currencys[0].name}
-                                    </Text>
-                                    <Text color={'softGray'} fontSize={'18px'}>
-                                        {dayjs(new Date(parseInt(e.timestamp) * 1000)).format('DD/MM/YYYY')}
-                                    </Text>
-                                </Flex>
-                            </Square>
-                        </Flex>
-                    </Td>
-                    <Td>
-                        <Flex
-                            w={'100%'}
-                            justifyContent={'center'}
-                            align={'center'}>
-                            <Text fontWeight={'bold'}>
-                                {e.low}
-                            </Text>
-                        </Flex>
-                    </Td>
-                    <Td>
-                        <Flex
-                            w={'100%'}
-                            align={'center'}>
-                            <Text fontWeight={'bold'}>
-                                {e.high}
-                            </Text>
-                        </Flex>
-                    </Td>
-                    <Td>
-                        <Flex
-                            w={'100%'}
-                            justifyContent={'flex-end'}
-                            align={'center'}>
-                            {variation(parseFloat(e.pctChange))}
-                        </Flex>
-                    </Td>
-                </Tr>)
-                    : <Tr></Tr>}
-            </Tbody >
-        </Table >
+        <Flex minW={'550px'} overflowX='auto'>
+            <Table variant="simple">
+                <Thead>
+                    <Tr>
+                        <Th>
+                            <Flex
+                                w={'100%'}
+                                align={'center'}>
+                                Coin
+                                <Image src={IconOrdem} cursor={'pointer'} onClick={() => dataOrder('timestamp', data)} />
+                            </Flex>
+                        </Th>
+                        <Th>
+                            <Flex
+                                w={'100%'}
+                                justifyContent={'center'}
+                                align={'center'}>
+                                Min
+                                <Image src={IconOrdem} cursor={'pointer'} onClick={() => dataOrder('low', data)} />
+                            </Flex>
+                        </Th>
+                        <Th>
+                            <Flex
+                                w={'100%'}
+                                align={'center'}>
+                                Max
+                                <Image src={IconOrdem} cursor={'pointer'} onClick={() => dataOrder('high', data)} />
+                            </Flex>
+                        </Th>
+                        <Th>
+                            <Flex
+                                w={'100%'}
+                                justifyContent={'flex-end'}
+                                align={'center'}>
+                                Variation
+                                <Image src={IconOrdem} cursor={'pointer'} onClick={() => dataOrder('varBid', data)} />
+                            </Flex>
+                        </Th>
+                    </Tr>
+                </Thead>
+                <Tbody>
+                    {data ? data.map((e, indice) => <Tr key={indice}>
+                        <Td>
+                            <Flex>
+                                <Square>
+                                    <Image src={DolarIcon} />
+                                </Square>
+                                <Square marginLeft={'9px'}>
+                                    <Flex direction={'column'}>
+                                        <Text color={'text'} fontSize={'18px'} fontWeight={'bold'}>
+                                            {currencys[0].name.split('/')[0]}
+                                        </Text>
+                                        <Text color={'softGray'} fontSize={'18px'}>
+                                            {dayjs(new Date(parseInt(e.timestamp) * 1000)).format('DD/MM/YYYY')}
+                                        </Text>
+                                    </Flex>
+                                </Square>
+                            </Flex>
+                        </Td>
+                        <Td>
+                            <Flex
+                                w={'100%'}
+                                justifyContent={'center'}
+                                align={'center'}>
+                                <Text fontWeight={'bold'}>
+                                    {e.low}
+                                </Text>
+                            </Flex>
+                        </Td>
+                        <Td>
+                            <Flex
+                                w={'100%'}
+                                align={'center'}>
+                                <Text fontWeight={'bold'}>
+                                    {e.high}
+                                </Text>
+                            </Flex>
+                        </Td>
+                        <Td>
+                            <Flex
+                                w={'100%'}
+                                justifyContent={'flex-end'}
+                                align={'center'}>
+                                {variation(parseFloat(e.pctChange))}
+                            </Flex>
+                        </Td>
+                    </Tr>)
+                        : <Tr></Tr>}
+                </Tbody >
+            </Table >
+        </Flex>
     );
 }
 

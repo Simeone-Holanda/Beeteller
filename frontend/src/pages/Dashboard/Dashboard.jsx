@@ -110,14 +110,18 @@ const Dashboard = () => {
                 <Image src={LoadIcon} alt='Atualizar' w={'22px'} h={'18px'} cursor={'pointer'} onClick={handleClickUpdate} />
             </Flex>
 
-            <Flex justifyContent={'space-between'}>
+            <Flex
+                flexWrap="wrap"
+                justifyContent={['center', 'center', 'space-between']}
+            >
                 {cards.map((card, index) => (
                     <CardCoin
                         key={index}
                         pairOfCrypton={card.pairOfCrypton}
                         value={card.value}
                         description={card.description}
-                        type={card.type} />
+                        type={card.type}
+                    />
                 ))}
             </Flex>
             <Flex

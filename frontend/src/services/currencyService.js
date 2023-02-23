@@ -2,8 +2,9 @@ import { api, requestConfig } from "../utils/config";
 
 
 // Get historical from 15 days
-const getHistoricalCurrency = async (data, params, token) => {
-    const config = requestConfig("GET", data); // token cai aq
+const getHistoricalCurrency = async (data, params) => {
+    let token = localStorage.getItem('token')
+    const config = requestConfig("GET", data, token); // token cai aq
 
     try {
         const res = await fetch(`${api}/currency-data/table/${params.symbol}/${params.quantity}`, config)
@@ -19,8 +20,9 @@ const getHistoricalCurrency = async (data, params, token) => {
 };
 
 // Get quote current
-const getCurrencyQuote = async (data, token) => {
-    const config = requestConfig("GET", data); // token cai aq
+const getCurrencyQuote = async (data) => {
+    let token = localStorage.getItem('token')
+    const config = requestConfig("GET", data, token);
 
     try {
         const res = await fetch(`${api}/currency-data/card`, config)

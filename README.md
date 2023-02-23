@@ -1,7 +1,7 @@
 # Teste da Beeteller
 Teste para vaga de desenvolvedor Full Stack. A descrição do desafio pode ser encontrada <a href='https://github.com/beetellergroup/selecao-full-stack'>Aqui</a> . 
 
-### Você pode acessa a aplicação rodando em live nesse 
+### Você pode acessa a aplicação rodando em live abaixo
 - Login: admin@gmail.com
 - password: 123456
 - <a href='https://beeteller.vercel.app/'> Beeteller Simeone </a>

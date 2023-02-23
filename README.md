@@ -42,6 +42,13 @@ Teste para vaga de desenvolvedor Full Stack. A descrição do desafio pode ser e
     
     npm start
 
+### Funcionalidade que pretendo adicionar nas proximas versões
+  - Sistema de notificações de erros usando a biblioteca React-Toastify
+  -  Efeitos de load em alguns componentes que carregam dados do backend
+  - Logout no backend também e não apenas no frontend. 
+
+<hr>
+
 <div align="center">
   <small>Desenvolvido por Simeone Aquino de Holanda - fev/2023 </small>
 </div>

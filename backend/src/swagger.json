@@ -1,0 +1,206 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "version": "1.0.0",
+        "title": "API - USER AUTHETICATION ",
+        "description": "API for user authentication applying security standard. "
+    },
+    "basePath": "/",
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "schemas": {
+            "Users": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer",
+                        "description": "Id of user in database. "
+                    },
+                    "username": {
+                        "type": "string",
+                        "example": "simes",
+                        "description": "Username. "
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "simeone.10s10@gmail.com",
+                        "description": "User email. "
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "123456",
+                        "description": "User password. "
+                    }
+                }
+            },
+            "Login": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "simeone.10s10@gmail.com",
+                        "description": "User email. "
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "123456",
+                        "description": "User password. "
+                    }
+                }
+            }
+        },
+        "responses": {
+            "500": {
+                "description": "Internal Server Error. "
+            },
+            "401": {
+                "description": "Unauthorized. "
+            },
+            "400": {
+                "description": "All input is required. "
+            },
+            "409": {
+                "description": "Information Conflict. "
+            },
+            "422": {
+                "description": "Unable to process the information. "
+            },
+            "200": {
+                "description": "Return message. "
+            },
+            "201": {
+                "description": "Created. "
+            }
+        }
+    },
+    "paths": {
+        "/account/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Login"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/account/logout": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    }
+                }
+            }
+        },
+        "/currency-data/card": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    }
+                }
+            }
+        },
+        "/currency-data/table/{symbol}/{quantity}": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "symbol",
+                        "required": true,
+                        "default": "USD-BRL",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Par da moeda que você quer obter os dados. "
+                    },
+                    {
+                        "in": "path",
+                        "name": "quantity",
+                        "required": true,
+                        "default": "15",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "description": "Quantidade de dados que serão retornados. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    }
+                }
+            }
+        }
+    }
+}

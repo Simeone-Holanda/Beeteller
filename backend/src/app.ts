@@ -3,8 +3,9 @@ import morgan from 'morgan'
 import helmet from 'helmet'
 import userRouter from './routes/userRoutes'
 import currencyRoutes from './routes/currencyRoutes'
-// import swaggerUi from 'swagger-ui-express';
-// import swaggerFile from './swagger.json';
+import swaggerUi from 'swagger-ui-express';
+import swaggerFile from './swagger.json';
+
 
 const app = express();
 
@@ -31,7 +32,7 @@ app.use((req, res, next) => {
 // proteção contra 11 ataques basicos de hackers 
 app.use(helmet())
 
-// app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 
 app.use('/account', userRouter)

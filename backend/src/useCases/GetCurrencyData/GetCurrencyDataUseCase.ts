@@ -1,5 +1,4 @@
 import AppError from "../../errors/Error";
-import { IUsersRepository } from "../../repositories/Interfaces/IUserRepository";
 import axios from 'axios'
 
 export class GetCurrencyDataUserUseCase {
@@ -11,7 +10,7 @@ export class GetCurrencyDataUserUseCase {
         return await axios.get(`${this.urlTable}/${pier}/${quantity}`)
     }
 
-    async execute(symbol: string, quantity: number = 15) {
+    async execute(symbol: string, quantity: number) {
         try {
             let currencyData = await this.getHistoricalCurrencyData(symbol, quantity)
             console.log(currencyData['data'])
